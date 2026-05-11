@@ -53,12 +53,12 @@
         select.badge-select { appearance: none; padding-right: 28px !important; background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e"); background-position: right 0.4rem center; background-repeat: no-repeat; background-size: 1.2em 1.2em; text-align: center; text-align-last: center; font-weight: 800; border: 2px solid transparent !important; border-radius: 10px; cursor: pointer; transition: all 0.3s; }
         select.badge-select:focus { outline: none; box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2); }
         
-        /* MODERN TABLO STİLLERİ */
-        .table-sticky th { position: sticky; top: 0; background: rgba(248, 250, 252, 0.95); backdrop-filter: blur(8px); z-index: 10; border-bottom: 2px solid #e2e8f0; color: #475569; font-weight: 900; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; vertical-align: bottom; }
+        /* BEYAZ EKRAN HATASI DÜZELTMELERİ (Blur ve Z-Index Ayarları) */
+        .table-sticky th { position: sticky; top: 0; background: #f8fafc; z-index: 20; border-bottom: 2px solid #e2e8f0; color: #475569; font-weight: 900; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; vertical-align: bottom; }
         .table-sticky th:hover { background: #f1f5f9; color: #1e293b; }
         .resize-wrapper { resize: horizontal; overflow: hidden; display: flex; align-items: center; min-width: 80px; width: 100%; min-height: 48px; padding: 12px 16px; box-sizing: border-box; }
         
-        #firmaListesiBody tr { border-bottom: 1px solid #f1f5f9; transition: all 0.2s ease; background-color: #ffffff; }
+        #firmaListesiBody tr { border-bottom: 1px solid #f1f5f9; transition: background-color 0.2s ease; background-color: #ffffff; }
         #firmaListesiBody tr:hover { background-color: #f8fafc; box-shadow: inset 4px 0 0 0 #6366f1; }
         .master-tr.dragging { opacity: 0.4; background-color: #e2e8f0 !important; }
         
@@ -66,11 +66,10 @@
         #giderTableBody tr:nth-child(even), .kredi-body tr:nth-child(even), #raporTableBody tr:nth-child(even) { background-color: #f8fafc; }
         #giderTableBody tr:hover, .kredi-body tr:hover, #raporTableBody tr:hover { background-color: #e2e8f0; }
         
-        .td-content { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; height: 100%; padding: 14px 16px; display: flex; align-items: center; }
+        .td-content { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; padding: 14px 16px; display: flex; align-items: center; min-height: 48px; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
         .badge { padding: 6px 14px; border-radius: 9999px; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; display: inline-flex; align-items: center; justify-content: center; }
         
-        /* SCROLLBAR GÜZELLEŞTİRMESİ */
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; border: 2px solid transparent; background-clip: padding-box; }
@@ -162,7 +161,6 @@
     </div>
 
     <div id="masterView" style="display: none;">
-        <!-- MODERN MASTER HEADER -->
         <header class="flex flex-col lg:flex-row justify-between items-center mb-6 bg-white/80 backdrop-blur-xl p-5 rounded-[1.5rem] border border-white/50 shadow-[0_8px_30px_rgb(0,0,0,0.06)] gap-4">
             <div class="flex items-center w-full lg:w-auto">
                 <button onclick="portfoyEkranaDon()" class="bg-slate-50 hover:bg-slate-200 text-slate-600 border border-slate-200 py-3 px-4 rounded-xl transition mr-4 shrink-0 shadow-sm"><i class="fa-solid fa-house text-base"></i></button>
@@ -185,12 +183,10 @@
                     <div class="w-px bg-slate-200 mx-1"></div>
                     <button onclick="sutunlariSifirla()" class="text-slate-400 hover:text-rose-600 hover:bg-rose-50 px-3 py-2 rounded-lg transition text-xs" title="Görünümü Sıfırla"><i class="fa-solid fa-rotate-left"></i></button>
                 </div>
-                <!-- MODERN YENİ FİRMA BUTONU -->
                 <button onclick="yeniFirmaEkle()" class="bg-gradient-to-r from-indigo-500 to-violet-500 hover:from-indigo-600 hover:to-violet-600 text-white font-black py-2.5 px-5 rounded-xl shadow-[0_4px_15px_rgba(99,102,241,0.4)] hover:shadow-[0_6px_20px_rgba(99,102,241,0.6)] transition-all transform hover:-translate-y-0.5 flex items-center text-xs tracking-wide"><i class="fa-solid fa-plus mr-2 text-sm"></i> Yeni Firma Ekle</button>
             </div>
         </header>
         
-        <!-- MODERN MASTER TABLE -->
         <div class="glass-card p-0 overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-slate-200/60 rounded-[1.5rem]">
             <div class="overflow-x-auto max-h-[72vh] rounded-t-[1.5rem]">
                 <table class="min-w-full text-sm text-left border-collapse bg-white" id="masterTable">
@@ -341,7 +337,6 @@
             setTimeout(()=>{toast.classList.remove('toast-enter-active');toast.classList.add('toast-exit');setTimeout(()=>toast.remove(),300);},3500);
         }
 
-        // MODERN VE CANLI BADGE RENKLERİ
         const getPillCSS = (status) => {
             const s = (status || '').toString().toUpperCase();
             if (s === 'AKTİF') return 'bg-emerald-100 text-emerald-800 border-emerald-300 shadow-sm';
@@ -570,7 +565,6 @@
                         <i class="fa-solid ${icon} text-9xl"></i>
                     </div>
 
-                    <!-- Düzenle / Sil Butonları - Tıklama Sorunu Çözüldü -->
                     <div class="absolute top-5 right-5 flex gap-2 z-20">
                         <button onclick="event.stopPropagation(); projeAdiDuzenle('${id}')" class="w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 border border-white/30 backdrop-blur-md text-white transition flex items-center justify-center shadow-sm relative z-30"><i class="fa-solid fa-pen text-sm"></i></button>
                         <button onclick="event.stopPropagation(); projeyiSil('${id}')" class="w-10 h-10 rounded-full bg-rose-500/50 hover:bg-rose-500 border border-rose-400/50 backdrop-blur-md text-white transition flex items-center justify-center shadow-sm relative z-30"><i class="fa-solid fa-trash text-sm"></i></button>
@@ -632,13 +626,11 @@
             suruklenenFirmaID = null;
         }
 
-        // MODERN VE CANLI MASTER (TABLO) EKRANI
         function renderMasterView() {
             if(!guncelProjeID) return; const p = MASTER_DATA.projeler[guncelProjeID]; const trH=document.getElementById('tableHeaderRow'); const tB=document.getElementById('firmaListesiBody');
             
             document.getElementById('siralamaIpucu').style.display = sortKolon ? 'none' : 'block';
 
-            // Şık Başlıklar
             trH.innerHTML=`<th class="p-4 text-center w-14 z-20" title="Kendi sıralamanız için basılı tutup sürükleyin"><i class="fa-solid fa-arrows-up-down text-slate-400"></i></th>`;
             DINAMIK_SUTUNLAR.forEach((s,i)=>{
                 if(!s.gizli) {
@@ -651,7 +643,8 @@
                     </th>`;
                 }
             });
-            trH.innerHTML+=`<th class="p-4 text-center sticky right-0 bg-white shadow-[-10px_0_15px_-3px_rgba(0,0,0,0.03)] z-30"><i class="fa-solid fa-bolt text-slate-400"></i></th>`; 
+            // BEYAZ EKRAN ÇÖZÜMÜ: Z-index ve Background değiştirildi (Blur silindi)
+            trH.innerHTML+=`<th class="p-4 text-center sticky right-0 bg-slate-50 shadow-[-10px_0_15px_-3px_rgba(0,0,0,0.03)] z-30"><i class="fa-solid fa-bolt text-slate-400"></i></th>`; 
             tB.innerHTML='';
 
             let fDizi=Object.entries(p.firmalar).map(([id,f])=>{
@@ -693,7 +686,6 @@
             let sira=1, isIst=p.tip==="istihdam";
             fDizi.forEach(item=>{
                 let id=item.id, b=item.b, getH=(col)=>{
-                    // İstihdam Şart Paneli
                     const getDonemG = (idx) => {
                         let donem = item.f.istihdam[idx]; if(!donem) return `<div class="td-content justify-center">-</div>`;
                         let t_top = 0, y_top = 0, f_top = 0, h = parseFloat(donem.hedef)||0;
@@ -714,7 +706,8 @@
                             tdBorder = 'bg-rose-50/50';
                         }
 
-                        return `<div class="td-content justify-center ${tdBorder} w-full h-full"><span class="${renk} px-3 py-1.5 border rounded-lg font-mono font-bold text-[11px] whitespace-nowrap transition-colors hover:brightness-95 cursor-default" title="Türk: ${t_top}/61 | Yabancı: ${y_top}/61 | Toplam: ${f_top}/${h}">${ikon}${f_top} / ${h}</span></div>`;
+                        // BEYAZ EKRAN ÇÖZÜMÜ: td-content h-full ve w-full class'ları kaldırıldı (Hücre yüksekliğini patlatıyordu)
+                        return `<div class="td-content justify-center ${tdBorder}"><span class="${renk} px-3 py-1.5 border rounded-lg font-mono font-bold text-[11px] whitespace-nowrap transition-colors hover:brightness-95 cursor-default" title="Türk: ${t_top}/61 | Yabancı: ${y_top}/61 | Toplam: ${f_top}/${h}">${ikon}${f_top} / ${h}</span></div>`;
                     };
 
                     if(col==='ist_gerceklesme') return getDonemG(0);
@@ -777,17 +770,18 @@
                 let dragAttr = !sortKolon ? `draggable="true" ondragstart="firmaDragStart(event, '${id}')" ondragover="firmaDragOver(event)" ondrop="firmaDrop(event, '${id}')" title="Sıralamak için basılı tut ve sürükle"` : `title="Sıralama aktifken sürüklenemez"`;
                 let cursorType = !sortKolon ? 'cursor-grab active:cursor-grabbing hover:bg-indigo-50/50 text-indigo-400' : 'text-slate-300 bg-slate-50/50';
 
-                // Canlı Satır Efekti
                 let tr=`<tr class="master-tr transition-all duration-300 group hover:bg-indigo-50/30" ${dragAttr}>
                     <td class="p-3 text-center font-mono text-xs border-r border-slate-100 select-none ${cursorType} transition-colors font-bold">
                         <i class="fa-solid fa-grip-vertical opacity-40 mr-1.5"></i>${sira++}
                     </td>`;
                 DINAMIK_SUTUNLAR.forEach(s=>{if(!s.gizli) tr+=`<td class="p-0 border-r border-slate-100 max-w-0 align-middle">${getH(s.id)}</td>`;});
                 
-                // Canlı Detay Butonu
-                tr+=`<td class="p-3 text-center sticky right-0 bg-white/80 backdrop-blur-md shadow-[-10px_0_15px_-3px_rgba(0,0,0,0.03)] flex justify-center items-center gap-2 group-hover:bg-indigo-50/90 transition-colors">
-                        <button onclick="sirketDuzenle('${id}')" class="text-slate-400 hover:text-indigo-600 bg-white hover:bg-indigo-50 border border-slate-200 w-9 h-9 rounded-xl flex items-center justify-center transition shadow-sm hover:shadow"><i class="fa-solid fa-pen text-xs"></i></button>
-                        <button onclick="sirketeGit('${id}')" class="bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-500 hover:to-teal-600 text-white px-4 py-2 rounded-xl font-black transition-all flex items-center text-[10px] uppercase tracking-widest shadow-md hover:shadow-lg transform hover:-translate-y-0.5 whitespace-nowrap"><i class="fa-solid fa-arrow-right mr-1.5"></i> Detay</button>
+                // BEYAZ EKRAN ÇÖZÜMÜ: td içindeki flex, div'e taşındı. td class'ından backdrop-blur silindi.
+                tr+=`<td class="p-3 text-center sticky right-0 bg-white shadow-[-10px_0_15px_-3px_rgba(0,0,0,0.03)] group-hover:bg-indigo-50/90 transition-colors z-10">
+                        <div class="flex justify-center items-center gap-2">
+                            <button onclick="sirketDuzenle('${id}')" class="text-slate-400 hover:text-indigo-600 bg-white hover:bg-indigo-50 border border-slate-200 w-9 h-9 rounded-xl flex items-center justify-center transition shadow-sm hover:shadow"><i class="fa-solid fa-pen text-xs"></i></button>
+                            <button onclick="sirketeGit('${id}')" class="bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-500 hover:to-teal-600 text-white px-4 py-2 rounded-xl font-black transition-all flex items-center text-[10px] uppercase tracking-widest shadow-md hover:shadow-lg transform hover:-translate-y-0.5 whitespace-nowrap"><i class="fa-solid fa-arrow-right mr-1.5"></i> Detay</button>
+                        </div>
                     </td></tr>`; 
                 tB.innerHTML+=tr;
             });
